@@ -72,12 +72,14 @@ namespace TrackingClient
                 {
                     var f = File.Create(path1);
                     f.Close();
+                    f.Dispose();
                 }
                 else
                 {
                     File.Delete(path1);
                     var f = File.Create(path1);
                     f.Close();
+                    f.Dispose();
                 }
 
                 //var path1 = "C:\\GTServer\\System\\TrackingClientSpain\\TrackingClient" + DateTime.Now.ToString("MM-dd-yyyy") + ".csv";
@@ -93,7 +95,7 @@ namespace TrackingClient
                 //    f.Close();
                 //}
                 //using (var writer = new StreamWriter(path1))
-                using (var writer = new StreamWriter(path1))
+                // using (var writer = new StreamWriter(path1))
                 //using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 //{
 
@@ -145,7 +147,8 @@ namespace TrackingClient
                 //        return false;
                 //    };
                 //}
-                using (StreamWriter DestinationFile = new StreamWriter(new FileStream(path1, FileMode.Create, FileAccess.Write, FileShare.Read)))
+                //  using (StreamWriter DestinationFile = new StreamWriter(new FileStream(path1, FileMode.Create, FileAccess.Write, FileShare.Read)))
+                using (StreamWriter DestinationFile = new StreamWriter(path1, true))
                 {
                     DestinationFile.WriteLine("T_NIF" + ";" + "T_DIRECCION" + ";" + "T_BALANCE" + ";" + "T_NOMBRE" + ";" + "T_MeterNumber" + ";" + "T_TELEFONO" + ";");
                     foreach (var item in Query)
