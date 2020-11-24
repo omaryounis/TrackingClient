@@ -95,7 +95,6 @@ namespace TrackingClient
                 //    f.Close();
                 //}
                 //using (var writer = new StreamWriter(path1))
-                // using (var writer = new StreamWriter(path1))
                 //using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 //{
 
@@ -112,10 +111,10 @@ namespace TrackingClient
                 //            csv.WriteField(column.ColumnName);
                 //        }
                 //        csv.NextRecord();
-                //        foreach(var item in Query)
+                //        foreach (var item in Query)
                 //        {
 
-                //           var dr = dt.NewRow();
+                //            var dr = dt.NewRow();
                 //            dr["T_NIF"] = item.T_NIF;
                 //            dr["T_DIRECCION"] = item.T_DIRECCION.Replace('"', ' ');
                 //            dr["T_BALANCE"] = item.T_BALANCE;
@@ -128,7 +127,7 @@ namespace TrackingClient
                 //        {
                 //            for (var i = 0; i < dt.Columns.Count; i++)
                 //            {
-                //                if(   dt.Columns[i].ColumnName!= "T_DIRECCION")
+                //                if (dt.Columns[i].ColumnName != "T_DIRECCION")
                 //                {
                 //                    csv.Configuration.Delimiter = ";";
                 //                }
@@ -141,20 +140,22 @@ namespace TrackingClient
 
                 //            csv.NextRecord();
                 //        }
-                //    } 
-                //    csv.Configuration.ShouldQuote = (field, context) =>
-                //    {
-                //        return false;
-                //    };
+                //    }
+                //    //csv.Configuration.ShouldQuote = (field, context) =>
+                //    //{
+                //    //    return false;
+                //    //};
                 //}
-                //  using (StreamWriter DestinationFile = new StreamWriter(new FileStream(path1, FileMode.Create, FileAccess.Write, FileShare.Read)))
+
+
+              
                 using (StreamWriter DestinationFile = new StreamWriter(path1, true))
                 {
                     DestinationFile.WriteLine("T_NIF" + ";" + "T_DIRECCION" + ";" + "T_BALANCE" + ";" + "T_NOMBRE" + ";" + "T_MeterNumber" + ";" + "T_TELEFONO" + ";");
-                    foreach (var item in Query)
-                    {
-                        DestinationFile.WriteLine(item.T_NIF + ";" + item.T_DIRECCION + ";" + item.T_BALANCE + ";" + item.T_NOMBRE + ";" + item.T_MeterNumber + ";" + item.T_TELEFONO + ";");
-                    }
+                    //foreach (var item in Query)
+                    //{
+                    //    DestinationFile.WriteLine(item.T_NIF + ";" + item.T_DIRECCION + ";" + item.T_BALANCE + ";" + item.T_NOMBRE + ";" + item.T_MeterNumber + ";" + item.T_TELEFONO + ";");
+                    //}
 
 
                 }
