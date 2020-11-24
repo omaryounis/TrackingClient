@@ -1,0 +1,2326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PSMMSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Alarms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="IsOpen" Type="tinyint" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ControlCommands">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ControlOrders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ControlOrderNumber" Type="bigint" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="IssueDate" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="MeterNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="TariffID" Type="int" Nullable="false" />
+          <Property Name="MeterTypeID" Type="int" Nullable="false" />
+          <Property Name="CardID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NoOfCards" Type="int" Nullable="false" />
+          <Property Name="ChargeCount" Type="int" Nullable="false" />
+          <Property Name="ContractedPower" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="IssuanceState" Type="int" Nullable="false" />
+          <Property Name="InstallDate" Type="datetime" Nullable="false" />
+          <Property Name="RegisterDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusByte" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SameClientID" Type="bigint" Nullable="false" />
+          <Property Name="AliasName" Type="nvarchar(max)" />
+          <Property Name="LastOnlineDate" Type="datetime" Nullable="false" />
+          <Property Name="NIF" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DailyConsumptions">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Consumption" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="TotalConsumption" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HistoricalDailyConsumptions">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="ConsumptionKW" Type="int" Nullable="false" />
+          <Property Name="Consumption" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Holidays">
+          <Key>
+            <PropertyRef Name="OffDay" />
+          </Key>
+          <Property Name="OffDay" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InvoiceDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="decimal" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="ChargeValue" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="Deposit" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="SameClientID" Type="bigint" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime" Nullable="false" />
+          <Property Name="ResponseDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="NumberOfTries" Type="int" Nullable="false" />
+          <Property Name="RefusionReason" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MeterReads">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="TotalConsumption" Type="bigint" Nullable="false" />
+          <Property Name="CurrentMonthlyConsumption" Type="bigint" Nullable="false" />
+          <Property Name="CurrentsliceConsumption" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="TotalBalance" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="RemainMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="OpenTrials" Type="int" Nullable="false" />
+          <Property Name="Battery" Type="nvarchar" MaxLength="15" />
+          <Property Name="EarthFrauds" Type="int" Nullable="false" />
+          <Property Name="Cardreads" Type="bigint" Nullable="false" />
+          <Property Name="SaveReadDate" Type="datetime" Nullable="false" />
+          <Property Name="Overload" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="RemainKW" Type="int" Nullable="false" />
+          <Property Name="SliceNo" Type="int" Nullable="false" />
+          <Property Name="Consum1" Type="int" Nullable="false" />
+          <Property Name="Consum2" Type="int" Nullable="false" />
+          <Property Name="Consum3" Type="int" Nullable="false" />
+          <Property Name="Consum4" Type="int" Nullable="false" />
+          <Property Name="Consum5" Type="int" Nullable="false" />
+          <Property Name="Consum6" Type="int" Nullable="false" />
+          <Property Name="Consum7" Type="int" Nullable="false" />
+          <Property Name="Consum8" Type="int" Nullable="false" />
+          <Property Name="Consum9" Type="int" Nullable="false" />
+          <Property Name="Consum10" Type="int" Nullable="false" />
+          <Property Name="Consum11" Type="int" Nullable="false" />
+          <Property Name="Consum12" Type="int" Nullable="false" />
+          <Property Name="MeterState" Type="int" Nullable="false" />
+          <Property Name="ChargeCount" Type="int" Nullable="false" />
+          <Property Name="RemainInDays" Type="int" Nullable="false" />
+          <Property Name="MeterReadDate" Type="datetime" Nullable="false" />
+          <Property Name="EarthFraudDuration" Type="int" Nullable="false" />
+          <Property Name="AvergeDailyConsum" Type="int" Nullable="false" />
+          <Property Name="PrevMonthConsum" Type="bigint" Nullable="false" />
+          <Property Name="OpenCoverDate" Type="datetime" Nullable="false" />
+          <Property Name="PowerFactor" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="DebitsInMeter" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="ControlCardId1" Type="int" Nullable="false" />
+          <Property Name="ControlCardId2" Type="int" Nullable="false" />
+          <Property Name="ControlCardId3" Type="int" Nullable="false" />
+          <Property Name="SumOfAllCharges" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="PH1_Failure" Type="int" Nullable="false" />
+          <Property Name="PH1_Duration" Type="int" Nullable="false" />
+          <Property Name="PH2_Failure" Type="int" Nullable="false" />
+          <Property Name="PH2_Duration" Type="int" Nullable="false" />
+          <Property Name="PH3_Failure" Type="int" Nullable="false" />
+          <Property Name="PH3_Duration" Type="int" Nullable="false" />
+          <Property Name="Meter_Failure" Type="int" Nullable="false" />
+          <Property Name="TotalConsumVAR" Type="int" Nullable="false" />
+          <Property Name="CurrMonthConsumVAR" Type="int" Nullable="false" />
+          <Property Name="PreviousMonthConsumVAR" Type="int" Nullable="false" />
+          <Property Name="OpenKiloWatt" Type="int" Nullable="false" />
+          <Property Name="DebitConsum" Type="int" Nullable="false" />
+          <Property Name="DebitsInMeterPrevious" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="MaxLoadKw" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="MaxLoadAm" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="MeterReadSource" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MeterTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Category" Type="int" Nullable="false" />
+          <Property Name="AlarmLimit" Type="smallint" Nullable="false" />
+          <Property Name="CutoffLimit" Type="smallint" Nullable="false" />
+          <Property Name="MaxCurrent" Type="smallint" Nullable="false" />
+          <Property Name="NumOfWires" Type="smallint" Nullable="false" />
+          <Property Name="CTRatio" Type="smallint" Nullable="false" />
+          <Property Name="UncutStartPeriod" Type="smallint" Nullable="false" />
+          <Property Name="UnCutEndPeriod" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderCommands">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="CommandID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="CommandID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PendingCharges">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Issued" Type="int" Nullable="false" />
+          <Property Name="IssueDate" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Client_ID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PendingClients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Issued" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="IssueDate" Type="datetime" Nullable="false" />
+          <Property Name="MeterTypeID" Type="int" Nullable="false" />
+          <Property Name="TariffID" Type="int" Nullable="false" />
+          <Property Name="Client_ID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PricePlan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Period1Price" Type="int" Nullable="false" />
+          <Property Name="Period2Price" Type="int" Nullable="false" />
+          <Property Name="Period3Price" Type="int" Nullable="false" />
+          <Property Name="Period4Price" Type="int" Nullable="false" />
+          <Property Name="InitialCharge" Type="int" Nullable="false" />
+          <Property Name="Period5Price" Type="int" Nullable="false" />
+          <Property Name="Period6Price" Type="int" Nullable="false" />
+          <Property Name="Period7Price" Type="int" Nullable="false" />
+          <Property Name="StartPeriod1" Type="int" Nullable="false" />
+          <Property Name="StartPeriod2" Type="int" Nullable="false" />
+          <Property Name="StartPeriod3" Type="int" Nullable="false" />
+          <Property Name="StartPeriod4" Type="int" Nullable="false" />
+          <Property Name="StartPeriod5" Type="int" Nullable="false" />
+          <Property Name="StartPeriod6" Type="int" Nullable="false" />
+          <Property Name="StartPeriod7" Type="int" Nullable="false" />
+          <Property Name="RecalculationLimit1" Type="int" Nullable="false" />
+          <Property Name="RecalculationLimit2" Type="int" Nullable="false" />
+          <Property Name="RecalculationLimit3" Type="int" Nullable="false" />
+          <Property Name="AddedPayment1" Type="bigint" Nullable="false" />
+          <Property Name="AddedPayment2" Type="bigint" Nullable="false" />
+          <Property Name="AddedPayment3" Type="bigint" Nullable="false" />
+          <Property Name="KiloWattAlarm" Type="int" Nullable="false" />
+          <Property Name="CustomerService1" Type="int" Nullable="false" />
+          <Property Name="CustomerService2" Type="int" Nullable="false" />
+          <Property Name="CustomerService3" Type="int" Nullable="false" />
+          <Property Name="CustomerService4" Type="int" Nullable="false" />
+          <Property Name="CustomerService5" Type="int" Nullable="false" />
+          <Property Name="CustomerService6" Type="int" Nullable="false" />
+          <Property Name="CustomerService7" Type="int" Nullable="false" />
+          <Property Name="CommercialDamgha" Type="int" Nullable="false" />
+          <Property Name="NoConsumptionFee" Type="int" Nullable="false" />
+          <Property Name="NoOfTariffs" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RemovedDailyConsumptions">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Consumption" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="TotalConsumption" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AddUserPrivilege" Type="bit" Nullable="false" />
+          <Property Name="AddRolePrivilege" Type="bit" Nullable="false" />
+          <Property Name="AddTariffPrivilege" Type="bit" Nullable="false" />
+          <Property Name="AddMeterTypePrivilege" Type="bit" Nullable="false" />
+          <Property Name="AddClientPrivilege" Type="bit" Nullable="false" />
+          <Property Name="ChargeClientPrivilege" Type="bit" Nullable="false" />
+          <Property Name="ClientQueryPrivilege" Type="bit" Nullable="false" />
+          <Property Name="EditRolePrivilege" Type="bit" Nullable="false" />
+          <Property Name="EditUserPrivilege" Type="bit" Nullable="false" />
+          <Property Name="EditUsersPasswordPrivilege" Type="bit" Nullable="false" />
+          <Property Name="ReportsPrivilege" Type="bit" Nullable="false" />
+          <Property Name="ReadMeterPrivilege" Type="bit" Nullable="false" />
+          <Property Name="MeterReadingsEnquiryPrivilege" Type="bit" Nullable="false" />
+          <Property Name="EditClientPrivilege" Type="bit" Nullable="false" />
+          <Property Name="CloseRelay" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TariffsPrices">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="InvoiceID" Type="int" />
+          <Property Name="Operation" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="TariffID" Type="int" Nullable="false" />
+          <Property Name="Balance" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="OnCardBalance" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TwelveMonthsConsumptions">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Year" />
+          </Key>
+          <Property Name="ClientID" Type="bigint" Nullable="false" />
+          <Property Name="Year" Type="smallint" Nullable="false" />
+          <Property Name="January" Type="int" Nullable="false" />
+          <Property Name="JanuaryMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="February" Type="int" Nullable="false" />
+          <Property Name="FebruaryMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="March" Type="int" Nullable="false" />
+          <Property Name="MarchMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="April" Type="int" Nullable="false" />
+          <Property Name="AprilMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="May" Type="int" Nullable="false" />
+          <Property Name="MayMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="June" Type="int" Nullable="false" />
+          <Property Name="JuneMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="July" Type="int" Nullable="false" />
+          <Property Name="JulyMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="August" Type="int" Nullable="false" />
+          <Property Name="AugustMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="September" Type="int" Nullable="false" />
+          <Property Name="SeptemberMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="October" Type="int" Nullable="false" />
+          <Property Name="OctoberMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="November" Type="int" Nullable="false" />
+          <Property Name="NovemberMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="December" Type="int" Nullable="false" />
+          <Property Name="DecemberMoney" Type="decimal" Precision="16" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="UserStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Alarms_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Alarms" Type="Self.Alarms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Alarms">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ControlOrders_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ControlOrders" Type="Self.ControlOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ControlOrders">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ControlOrders_dbo_Users_UserID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ControlOrders" Type="Self.ControlOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ControlOrders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Customers_dbo_MeterTypes_MeterTypeID">
+          <End Role="MeterTypes" Type="Self.MeterTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeterTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="MeterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Customers_dbo_Tariffs_TariffID">
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PricePlan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="TariffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DailyConsumptions_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DailyConsumptions" Type="Self.DailyConsumptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DailyConsumptions">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_HistoricalDailyConsumptions_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HistoricalDailyConsumptions" Type="Self.HistoricalDailyConsumptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HistoricalDailyConsumptions">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InvoiceDetails_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InvoiceDetails" Type="Self.InvoiceDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InvoiceDetails">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InvoiceDetails_dbo_Users_UserID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InvoiceDetails" Type="Self.InvoiceDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InvoiceDetails">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MeterReads_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MeterReads" Type="Self.MeterReads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MeterReads">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MeterReads_dbo_Users_UserID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MeterReads" Type="Self.MeterReads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MeterReads">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderCommands_dbo_ControlCommands_CommandID">
+          <End Role="ControlCommands" Type="Self.ControlCommands" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderCommands" Type="Self.OrderCommands" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ControlCommands">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderCommands">
+              <PropertyRef Name="CommandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderCommands_dbo_ControlOrders_OrderID">
+          <End Role="ControlOrders" Type="Self.ControlOrders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderCommands" Type="Self.OrderCommands" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ControlOrders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderCommands">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingCharges_dbo_Customers_Client_ID">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="PendingCharges" Type="Self.PendingCharges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingCharges">
+              <PropertyRef Name="Client_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingCharges_dbo_InvoiceDetails_ID">
+          <End Role="InvoiceDetails" Type="Self.InvoiceDetails" Multiplicity="1" />
+          <End Role="PendingCharges" Type="Self.PendingCharges" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingCharges">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingCharges_dbo_Users_UserID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PendingCharges" Type="Self.PendingCharges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingCharges">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingClients_dbo_Customers_Client_ID">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="PendingClients" Type="Self.PendingClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingClients">
+              <PropertyRef Name="Client_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingClients_dbo_MeterTypes_MeterTypeID">
+          <End Role="MeterTypes" Type="Self.MeterTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PendingClients" Type="Self.PendingClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeterTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingClients">
+              <PropertyRef Name="MeterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingClients_dbo_Tariffs_TariffID">
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PendingClients" Type="Self.PendingClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PricePlan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingClients">
+              <PropertyRef Name="TariffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingClients_dbo_Users_UserID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PendingClients" Type="Self.PendingClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingClients">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period1Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrices" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period1Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period2Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrices" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period2Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period3Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrices" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period3Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period4Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrices" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period4Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period5Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrices" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period5Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period6Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrices" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period6Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period7Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrices" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period7Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transactions_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transactions_dbo_InvoiceDetails_InvoiceID">
+          <End Role="InvoiceDetails" Type="Self.InvoiceDetails" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="InvoiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transactions_dbo_Tariffs_TariffID">
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PricePlan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="TariffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transactions_dbo_Users_UserID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TwelveMonthsConsumptions_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TwelveMonthsConsumptions" Type="Self.TwelveMonthsConsumptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TwelveMonthsConsumptions">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Roles_RoleID">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PSMMSDBModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Alarms" EntityType="Self.Alarms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ControlCommands" EntityType="Self.ControlCommands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ControlOrders" EntityType="Self.ControlOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyConsumptions" EntityType="Self.DailyConsumptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoricalDailyConsumptions" EntityType="Self.HistoricalDailyConsumptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Holidays" EntityType="Self.Holidays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceDetails" EntityType="Self.InvoiceDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeterReads" EntityType="Self.MeterReads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeterTypes" EntityType="Self.MeterTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderCommands" EntityType="Self.OrderCommands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PendingCharges" EntityType="Self.PendingCharges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PendingClients" EntityType="Self.PendingClients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PricePlan" EntityType="Self.PricePlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RemovedDailyConsumptions" EntityType="Self.RemovedDailyConsumptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TariffsPrices" EntityType="Self.TariffsPrices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TwelveMonthsConsumptions" EntityType="Self.TwelveMonthsConsumptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Alarms_dbo_Customers_ClientID" Association="Self.FK_dbo_Alarms_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Alarms" EntitySet="Alarms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ControlOrders_dbo_Customers_ClientID" Association="Self.FK_dbo_ControlOrders_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ControlOrders" EntitySet="ControlOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ControlOrders_dbo_Users_UserID" Association="Self.FK_dbo_ControlOrders_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ControlOrders" EntitySet="ControlOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Customers_dbo_MeterTypes_MeterTypeID" Association="Self.FK_dbo_Customers_dbo_MeterTypes_MeterTypeID">
+            <End Role="MeterTypes" EntitySet="MeterTypes" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Customers_dbo_Tariffs_TariffID" Association="Self.FK_dbo_Customers_dbo_Tariffs_TariffID">
+            <End Role="PricePlan" EntitySet="PricePlan" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DailyConsumptions_dbo_Customers_ClientID" Association="Self.FK_dbo_DailyConsumptions_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="DailyConsumptions" EntitySet="DailyConsumptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_HistoricalDailyConsumptions_dbo_Customers_ClientID" Association="Self.FK_dbo_HistoricalDailyConsumptions_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="HistoricalDailyConsumptions" EntitySet="HistoricalDailyConsumptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InvoiceDetails_dbo_Customers_ClientID" Association="Self.FK_dbo_InvoiceDetails_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="InvoiceDetails" EntitySet="InvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InvoiceDetails_dbo_Users_UserID" Association="Self.FK_dbo_InvoiceDetails_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="InvoiceDetails" EntitySet="InvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MeterReads_dbo_Customers_ClientID" Association="Self.FK_dbo_MeterReads_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="MeterReads" EntitySet="MeterReads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MeterReads_dbo_Users_UserID" Association="Self.FK_dbo_MeterReads_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="MeterReads" EntitySet="MeterReads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderCommands_dbo_ControlCommands_CommandID" Association="Self.FK_dbo_OrderCommands_dbo_ControlCommands_CommandID">
+            <End Role="ControlCommands" EntitySet="ControlCommands" />
+            <End Role="OrderCommands" EntitySet="OrderCommands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderCommands_dbo_ControlOrders_OrderID" Association="Self.FK_dbo_OrderCommands_dbo_ControlOrders_OrderID">
+            <End Role="ControlOrders" EntitySet="ControlOrders" />
+            <End Role="OrderCommands" EntitySet="OrderCommands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingCharges_dbo_Customers_Client_ID" Association="Self.FK_dbo_PendingCharges_dbo_Customers_Client_ID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="PendingCharges" EntitySet="PendingCharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingCharges_dbo_InvoiceDetails_ID" Association="Self.FK_dbo_PendingCharges_dbo_InvoiceDetails_ID">
+            <End Role="InvoiceDetails" EntitySet="InvoiceDetails" />
+            <End Role="PendingCharges" EntitySet="PendingCharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingCharges_dbo_Users_UserID" Association="Self.FK_dbo_PendingCharges_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PendingCharges" EntitySet="PendingCharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingClients_dbo_Customers_Client_ID" Association="Self.FK_dbo_PendingClients_dbo_Customers_Client_ID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="PendingClients" EntitySet="PendingClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingClients_dbo_MeterTypes_MeterTypeID" Association="Self.FK_dbo_PendingClients_dbo_MeterTypes_MeterTypeID">
+            <End Role="MeterTypes" EntitySet="MeterTypes" />
+            <End Role="PendingClients" EntitySet="PendingClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingClients_dbo_Tariffs_TariffID" Association="Self.FK_dbo_PendingClients_dbo_Tariffs_TariffID">
+            <End Role="PricePlan" EntitySet="PricePlan" />
+            <End Role="PendingClients" EntitySet="PendingClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingClients_dbo_Users_UserID" Association="Self.FK_dbo_PendingClients_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PendingClients" EntitySet="PendingClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period1Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period1Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period2Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period2Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period3Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period3Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period4Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period4Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period5Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period5Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period6Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period6Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period7Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period7Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transactions_dbo_Customers_ClientID" Association="Self.FK_dbo_Transactions_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transactions_dbo_InvoiceDetails_InvoiceID" Association="Self.FK_dbo_Transactions_dbo_InvoiceDetails_InvoiceID">
+            <End Role="InvoiceDetails" EntitySet="InvoiceDetails" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transactions_dbo_Tariffs_TariffID" Association="Self.FK_dbo_Transactions_dbo_Tariffs_TariffID">
+            <End Role="PricePlan" EntitySet="PricePlan" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transactions_dbo_Users_UserID" Association="Self.FK_dbo_Transactions_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TwelveMonthsConsumptions_dbo_Customers_ClientID" Association="Self.FK_dbo_TwelveMonthsConsumptions_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="TwelveMonthsConsumptions" EntitySet="TwelveMonthsConsumptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Roles_RoleID" Association="Self.FK_dbo_Users_dbo_Roles_RoleID">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PSMMSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Alarm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="IsOpen" Type="Byte" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_Alarms_dbo_Customers_ClientID" FromRole="Alarms" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="ControlCommand">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ControlOrders" Relationship="Self.OrderCommands" FromRole="ControlCommands" ToRole="ControlOrders" />
+        </EntityType>
+        <EntityType Name="ControlOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ControlOrderNumber" Type="Int64" Nullable="false" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="IssueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_ControlOrders_dbo_Customers_ClientID" FromRole="ControlOrders" ToRole="Customers" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_ControlOrders_dbo_Users_UserID" FromRole="ControlOrders" ToRole="Users" />
+          <NavigationProperty Name="ControlCommands" Relationship="Self.OrderCommands" FromRole="ControlOrders" ToRole="ControlCommands" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="MeterNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TariffID" Type="Int32" Nullable="false" />
+          <Property Name="MeterTypeID" Type="Int32" Nullable="false" />
+          <Property Name="CardID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NoOfCards" Type="Int32" Nullable="false" />
+          <Property Name="ChargeCount" Type="Int32" Nullable="false" />
+          <Property Name="ContractedPower" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="IssuanceState" Type="Int32" Nullable="false" />
+          <Property Name="InstallDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusByte" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SameClientID" Type="Int64" Nullable="false" />
+          <Property Name="AliasName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastOnlineDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NIF" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Alarms" Relationship="Self.FK_dbo_Alarms_dbo_Customers_ClientID" FromRole="Customers" ToRole="Alarms" />
+          <NavigationProperty Name="ControlOrders" Relationship="Self.FK_dbo_ControlOrders_dbo_Customers_ClientID" FromRole="Customers" ToRole="ControlOrders" />
+          <NavigationProperty Name="MeterType" Relationship="Self.FK_dbo_Customers_dbo_MeterTypes_MeterTypeID" FromRole="Customers" ToRole="MeterTypes" />
+          <NavigationProperty Name="PricePlan" Relationship="Self.FK_dbo_Customers_dbo_Tariffs_TariffID" FromRole="Customers" ToRole="PricePlan" />
+          <NavigationProperty Name="DailyConsumptions" Relationship="Self.FK_dbo_DailyConsumptions_dbo_Customers_ClientID" FromRole="Customers" ToRole="DailyConsumptions" />
+          <NavigationProperty Name="HistoricalDailyConsumptions" Relationship="Self.FK_dbo_HistoricalDailyConsumptions_dbo_Customers_ClientID" FromRole="Customers" ToRole="HistoricalDailyConsumptions" />
+          <NavigationProperty Name="InvoiceDetails" Relationship="Self.FK_dbo_InvoiceDetails_dbo_Customers_ClientID" FromRole="Customers" ToRole="InvoiceDetails" />
+          <NavigationProperty Name="MeterReads" Relationship="Self.FK_dbo_MeterReads_dbo_Customers_ClientID" FromRole="Customers" ToRole="MeterReads" />
+          <NavigationProperty Name="PendingCharges" Relationship="Self.FK_dbo_PendingCharges_dbo_Customers_Client_ID" FromRole="Customers" ToRole="PendingCharges" />
+          <NavigationProperty Name="PendingClients" Relationship="Self.FK_dbo_PendingClients_dbo_Customers_Client_ID" FromRole="Customers" ToRole="PendingClients" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK_dbo_Transactions_dbo_Customers_ClientID" FromRole="Customers" ToRole="Transactions" />
+          <NavigationProperty Name="TwelveMonthsConsumptions" Relationship="Self.FK_dbo_TwelveMonthsConsumptions_dbo_Customers_ClientID" FromRole="Customers" ToRole="TwelveMonthsConsumptions" />
+        </EntityType>
+        <EntityType Name="DailyConsumption">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Consumption" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="TotalConsumption" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_DailyConsumptions_dbo_Customers_ClientID" FromRole="DailyConsumptions" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="HistoricalDailyConsumption">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ConsumptionKW" Type="Int32" Nullable="false" />
+          <Property Name="Consumption" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_HistoricalDailyConsumptions_dbo_Customers_ClientID" FromRole="HistoricalDailyConsumptions" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Holiday">
+          <Key>
+            <PropertyRef Name="OffDay" />
+          </Key>
+          <Property Name="OffDay" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="InvoiceDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceNumber" Type="Decimal" Precision="20" Scale="0" Nullable="false" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="ChargeValue" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="Deposit" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SameClientID" Type="Int64" Nullable="false" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ResponseDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfTries" Type="Int32" Nullable="false" />
+          <Property Name="RefusionReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_InvoiceDetails_dbo_Customers_ClientID" FromRole="InvoiceDetails" ToRole="Customers" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_InvoiceDetails_dbo_Users_UserID" FromRole="InvoiceDetails" ToRole="Users" />
+          <NavigationProperty Name="PendingCharge" Relationship="Self.FK_dbo_PendingCharges_dbo_InvoiceDetails_ID" FromRole="InvoiceDetails" ToRole="PendingCharges" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK_dbo_Transactions_dbo_InvoiceDetails_InvoiceID" FromRole="InvoiceDetails" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="MeterRead">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="TotalConsumption" Type="Int64" Nullable="false" />
+          <Property Name="CurrentMonthlyConsumption" Type="Int64" Nullable="false" />
+          <Property Name="CurrentsliceConsumption" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="TotalBalance" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="RemainMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="OpenTrials" Type="Int32" Nullable="false" />
+          <Property Name="Battery" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="EarthFrauds" Type="Int32" Nullable="false" />
+          <Property Name="Cardreads" Type="Int64" Nullable="false" />
+          <Property Name="SaveReadDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Overload" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="RemainKW" Type="Int32" Nullable="false" />
+          <Property Name="SliceNo" Type="Int32" Nullable="false" />
+          <Property Name="Consum1" Type="Int32" Nullable="false" />
+          <Property Name="Consum2" Type="Int32" Nullable="false" />
+          <Property Name="Consum3" Type="Int32" Nullable="false" />
+          <Property Name="Consum4" Type="Int32" Nullable="false" />
+          <Property Name="Consum5" Type="Int32" Nullable="false" />
+          <Property Name="Consum6" Type="Int32" Nullable="false" />
+          <Property Name="Consum7" Type="Int32" Nullable="false" />
+          <Property Name="Consum8" Type="Int32" Nullable="false" />
+          <Property Name="Consum9" Type="Int32" Nullable="false" />
+          <Property Name="Consum10" Type="Int32" Nullable="false" />
+          <Property Name="Consum11" Type="Int32" Nullable="false" />
+          <Property Name="Consum12" Type="Int32" Nullable="false" />
+          <Property Name="MeterState" Type="Int32" Nullable="false" />
+          <Property Name="ChargeCount" Type="Int32" Nullable="false" />
+          <Property Name="RemainInDays" Type="Int32" Nullable="false" />
+          <Property Name="MeterReadDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EarthFraudDuration" Type="Int32" Nullable="false" />
+          <Property Name="AvergeDailyConsum" Type="Int32" Nullable="false" />
+          <Property Name="PrevMonthConsum" Type="Int64" Nullable="false" />
+          <Property Name="OpenCoverDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PowerFactor" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="DebitsInMeter" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="ControlCardId1" Type="Int32" Nullable="false" />
+          <Property Name="ControlCardId2" Type="Int32" Nullable="false" />
+          <Property Name="ControlCardId3" Type="Int32" Nullable="false" />
+          <Property Name="SumOfAllCharges" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="PH1_Failure" Type="Int32" Nullable="false" />
+          <Property Name="PH1_Duration" Type="Int32" Nullable="false" />
+          <Property Name="PH2_Failure" Type="Int32" Nullable="false" />
+          <Property Name="PH2_Duration" Type="Int32" Nullable="false" />
+          <Property Name="PH3_Failure" Type="Int32" Nullable="false" />
+          <Property Name="PH3_Duration" Type="Int32" Nullable="false" />
+          <Property Name="Meter_Failure" Type="Int32" Nullable="false" />
+          <Property Name="TotalConsumVAR" Type="Int32" Nullable="false" />
+          <Property Name="CurrMonthConsumVAR" Type="Int32" Nullable="false" />
+          <Property Name="PreviousMonthConsumVAR" Type="Int32" Nullable="false" />
+          <Property Name="OpenKiloWatt" Type="Int32" Nullable="false" />
+          <Property Name="DebitConsum" Type="Int32" Nullable="false" />
+          <Property Name="DebitsInMeterPrevious" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="MaxLoadKw" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="MaxLoadAm" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="MeterReadSource" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_MeterReads_dbo_Customers_ClientID" FromRole="MeterReads" ToRole="Customers" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_MeterReads_dbo_Users_UserID" FromRole="MeterReads" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="MeterType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Category" Type="Int32" Nullable="false" />
+          <Property Name="AlarmLimit" Type="Int16" Nullable="false" />
+          <Property Name="CutoffLimit" Type="Int16" Nullable="false" />
+          <Property Name="MaxCurrent" Type="Int16" Nullable="false" />
+          <Property Name="NumOfWires" Type="Int16" Nullable="false" />
+          <Property Name="CTRatio" Type="Int16" Nullable="false" />
+          <Property Name="UncutStartPeriod" Type="Int16" Nullable="false" />
+          <Property Name="UnCutEndPeriod" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_dbo_Customers_dbo_MeterTypes_MeterTypeID" FromRole="MeterTypes" ToRole="Customers" />
+          <NavigationProperty Name="PendingClients" Relationship="Self.FK_dbo_PendingClients_dbo_MeterTypes_MeterTypeID" FromRole="MeterTypes" ToRole="PendingClients" />
+        </EntityType>
+        <EntityType Name="PendingCharge">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Issued" Type="Int32" Nullable="false" />
+          <Property Name="IssueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Client_ID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_PendingCharges_dbo_Customers_Client_ID" FromRole="PendingCharges" ToRole="Customers" />
+          <NavigationProperty Name="InvoiceDetail" Relationship="Self.FK_dbo_PendingCharges_dbo_InvoiceDetails_ID" FromRole="PendingCharges" ToRole="InvoiceDetails" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_PendingCharges_dbo_Users_UserID" FromRole="PendingCharges" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="PendingClient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Issued" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="IssueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MeterTypeID" Type="Int32" Nullable="false" />
+          <Property Name="TariffID" Type="Int32" Nullable="false" />
+          <Property Name="Client_ID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_PendingClients_dbo_Customers_Client_ID" FromRole="PendingClients" ToRole="Customers" />
+          <NavigationProperty Name="MeterType" Relationship="Self.FK_dbo_PendingClients_dbo_MeterTypes_MeterTypeID" FromRole="PendingClients" ToRole="MeterTypes" />
+          <NavigationProperty Name="PricePlan" Relationship="Self.FK_dbo_PendingClients_dbo_Tariffs_TariffID" FromRole="PendingClients" ToRole="PricePlan" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_PendingClients_dbo_Users_UserID" FromRole="PendingClients" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="PricePlan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Period1Price" Type="Int32" Nullable="false" />
+          <Property Name="Period2Price" Type="Int32" Nullable="false" />
+          <Property Name="Period3Price" Type="Int32" Nullable="false" />
+          <Property Name="Period4Price" Type="Int32" Nullable="false" />
+          <Property Name="InitialCharge" Type="Int32" Nullable="false" />
+          <Property Name="Period5Price" Type="Int32" Nullable="false" />
+          <Property Name="Period6Price" Type="Int32" Nullable="false" />
+          <Property Name="Period7Price" Type="Int32" Nullable="false" />
+          <Property Name="StartPeriod1" Type="Int32" Nullable="false" />
+          <Property Name="StartPeriod2" Type="Int32" Nullable="false" />
+          <Property Name="StartPeriod3" Type="Int32" Nullable="false" />
+          <Property Name="StartPeriod4" Type="Int32" Nullable="false" />
+          <Property Name="StartPeriod5" Type="Int32" Nullable="false" />
+          <Property Name="StartPeriod6" Type="Int32" Nullable="false" />
+          <Property Name="StartPeriod7" Type="Int32" Nullable="false" />
+          <Property Name="RecalculationLimit1" Type="Int32" Nullable="false" />
+          <Property Name="RecalculationLimit2" Type="Int32" Nullable="false" />
+          <Property Name="RecalculationLimit3" Type="Int32" Nullable="false" />
+          <Property Name="AddedPayment1" Type="Int64" Nullable="false" />
+          <Property Name="AddedPayment2" Type="Int64" Nullable="false" />
+          <Property Name="AddedPayment3" Type="Int64" Nullable="false" />
+          <Property Name="KiloWattAlarm" Type="Int32" Nullable="false" />
+          <Property Name="CustomerService1" Type="Int32" Nullable="false" />
+          <Property Name="CustomerService2" Type="Int32" Nullable="false" />
+          <Property Name="CustomerService3" Type="Int32" Nullable="false" />
+          <Property Name="CustomerService4" Type="Int32" Nullable="false" />
+          <Property Name="CustomerService5" Type="Int32" Nullable="false" />
+          <Property Name="CustomerService6" Type="Int32" Nullable="false" />
+          <Property Name="CustomerService7" Type="Int32" Nullable="false" />
+          <Property Name="CommercialDamgha" Type="Int32" Nullable="false" />
+          <Property Name="NoConsumptionFee" Type="Int32" Nullable="false" />
+          <Property Name="NoOfTariffs" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_dbo_Customers_dbo_Tariffs_TariffID" FromRole="PricePlan" ToRole="Customers" />
+          <NavigationProperty Name="PendingClients" Relationship="Self.FK_dbo_PendingClients_dbo_Tariffs_TariffID" FromRole="PricePlan" ToRole="PendingClients" />
+          <NavigationProperty Name="TariffsPrice" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period1Price" FromRole="PricePlan" ToRole="TariffsPrices" />
+          <NavigationProperty Name="TariffsPrice1" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period2Price" FromRole="PricePlan" ToRole="TariffsPrices" />
+          <NavigationProperty Name="TariffsPrice2" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period3Price" FromRole="PricePlan" ToRole="TariffsPrices" />
+          <NavigationProperty Name="TariffsPrice3" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period4Price" FromRole="PricePlan" ToRole="TariffsPrices" />
+          <NavigationProperty Name="TariffsPrice4" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period5Price" FromRole="PricePlan" ToRole="TariffsPrices" />
+          <NavigationProperty Name="TariffsPrice5" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period6Price" FromRole="PricePlan" ToRole="TariffsPrices" />
+          <NavigationProperty Name="TariffsPrice6" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period7Price" FromRole="PricePlan" ToRole="TariffsPrices" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK_dbo_Transactions_dbo_Tariffs_TariffID" FromRole="PricePlan" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="RemovedDailyConsumption">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Consumption" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="TotalConsumption" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddUserPrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="AddRolePrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="AddTariffPrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="AddMeterTypePrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="AddClientPrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="ChargeClientPrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="ClientQueryPrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="EditRolePrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="EditUserPrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="EditUsersPasswordPrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="ReportsPrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="ReadMeterPrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="MeterReadingsEnquiryPrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="EditClientPrivilege" Type="Boolean" Nullable="false" />
+          <Property Name="CloseRelay" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Users_dbo_Roles_RoleID" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="TariffsPrice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <NavigationProperty Name="PricePlans" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period1Price" FromRole="TariffsPrices" ToRole="PricePlan" />
+          <NavigationProperty Name="PricePlans1" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period2Price" FromRole="TariffsPrices" ToRole="PricePlan" />
+          <NavigationProperty Name="PricePlans2" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period3Price" FromRole="TariffsPrices" ToRole="PricePlan" />
+          <NavigationProperty Name="PricePlans3" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period4Price" FromRole="TariffsPrices" ToRole="PricePlan" />
+          <NavigationProperty Name="PricePlans4" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period5Price" FromRole="TariffsPrices" ToRole="PricePlan" />
+          <NavigationProperty Name="PricePlans5" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period6Price" FromRole="TariffsPrices" ToRole="PricePlan" />
+          <NavigationProperty Name="PricePlans6" Relationship="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period7Price" FromRole="TariffsPrices" ToRole="PricePlan" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="InvoiceID" Type="Int32" />
+          <Property Name="Operation" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TariffID" Type="Int32" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="OnCardBalance" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_Transactions_dbo_Customers_ClientID" FromRole="Transactions" ToRole="Customers" />
+          <NavigationProperty Name="InvoiceDetail" Relationship="Self.FK_dbo_Transactions_dbo_InvoiceDetails_InvoiceID" FromRole="Transactions" ToRole="InvoiceDetails" />
+          <NavigationProperty Name="PricePlan" Relationship="Self.FK_dbo_Transactions_dbo_Tariffs_TariffID" FromRole="Transactions" ToRole="PricePlan" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_Transactions_dbo_Users_UserID" FromRole="Transactions" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="TwelveMonthsConsumption">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Year" />
+          </Key>
+          <Property Name="ClientID" Type="Int64" Nullable="false" />
+          <Property Name="Year" Type="Int16" Nullable="false" />
+          <Property Name="January" Type="Int32" Nullable="false" />
+          <Property Name="JanuaryMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="February" Type="Int32" Nullable="false" />
+          <Property Name="FebruaryMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="March" Type="Int32" Nullable="false" />
+          <Property Name="MarchMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="April" Type="Int32" Nullable="false" />
+          <Property Name="AprilMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="May" Type="Int32" Nullable="false" />
+          <Property Name="MayMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="June" Type="Int32" Nullable="false" />
+          <Property Name="JuneMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="July" Type="Int32" Nullable="false" />
+          <Property Name="JulyMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="August" Type="Int32" Nullable="false" />
+          <Property Name="AugustMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="September" Type="Int32" Nullable="false" />
+          <Property Name="SeptemberMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="October" Type="Int32" Nullable="false" />
+          <Property Name="OctoberMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="November" Type="Int32" Nullable="false" />
+          <Property Name="NovemberMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <Property Name="December" Type="Int32" Nullable="false" />
+          <Property Name="DecemberMoney" Type="Decimal" Precision="16" Scale="3" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_TwelveMonthsConsumptions_dbo_Customers_ClientID" FromRole="TwelveMonthsConsumptions" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="UserStatus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ControlOrders" Relationship="Self.FK_dbo_ControlOrders_dbo_Users_UserID" FromRole="Users" ToRole="ControlOrders" />
+          <NavigationProperty Name="InvoiceDetails" Relationship="Self.FK_dbo_InvoiceDetails_dbo_Users_UserID" FromRole="Users" ToRole="InvoiceDetails" />
+          <NavigationProperty Name="MeterReads" Relationship="Self.FK_dbo_MeterReads_dbo_Users_UserID" FromRole="Users" ToRole="MeterReads" />
+          <NavigationProperty Name="PendingCharges" Relationship="Self.FK_dbo_PendingCharges_dbo_Users_UserID" FromRole="Users" ToRole="PendingCharges" />
+          <NavigationProperty Name="PendingClients" Relationship="Self.FK_dbo_PendingClients_dbo_Users_UserID" FromRole="Users" ToRole="PendingClients" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_dbo_Users_dbo_Roles_RoleID" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK_dbo_Transactions_dbo_Users_UserID" FromRole="Users" ToRole="Transactions" />
+        </EntityType>
+        <Association Name="FK_dbo_Alarms_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Alarms" Type="Self.Alarm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Alarms">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ControlOrders_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ControlOrders" Type="Self.ControlOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ControlOrders">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ControlOrders_dbo_Users_UserID">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ControlOrders" Type="Self.ControlOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ControlOrders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Customers_dbo_MeterTypes_MeterTypeID">
+          <End Role="MeterTypes" Type="Self.MeterType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeterTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="MeterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Customers_dbo_Tariffs_TariffID">
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PricePlan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="TariffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DailyConsumptions_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DailyConsumptions" Type="Self.DailyConsumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DailyConsumptions">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_HistoricalDailyConsumptions_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HistoricalDailyConsumptions" Type="Self.HistoricalDailyConsumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HistoricalDailyConsumptions">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InvoiceDetails_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InvoiceDetails" Type="Self.InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InvoiceDetails">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MeterReads_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MeterReads" Type="Self.MeterRead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MeterReads">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingCharges_dbo_Customers_Client_ID">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="PendingCharges" Type="Self.PendingCharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingCharges">
+              <PropertyRef Name="Client_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingClients_dbo_Customers_Client_ID">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="PendingClients" Type="Self.PendingClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingClients">
+              <PropertyRef Name="Client_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transactions_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TwelveMonthsConsumptions_dbo_Customers_ClientID">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TwelveMonthsConsumptions" Type="Self.TwelveMonthsConsumption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TwelveMonthsConsumptions">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InvoiceDetails_dbo_Users_UserID">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InvoiceDetails" Type="Self.InvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InvoiceDetails">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingCharges_dbo_InvoiceDetails_ID">
+          <End Role="InvoiceDetails" Type="Self.InvoiceDetail" Multiplicity="1" />
+          <End Role="PendingCharges" Type="Self.PendingCharge" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingCharges">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transactions_dbo_InvoiceDetails_InvoiceID">
+          <End Role="InvoiceDetails" Type="Self.InvoiceDetail" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="InvoiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_MeterReads_dbo_Users_UserID">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MeterReads" Type="Self.MeterRead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MeterReads">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingClients_dbo_MeterTypes_MeterTypeID">
+          <End Role="MeterTypes" Type="Self.MeterType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PendingClients" Type="Self.PendingClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeterTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingClients">
+              <PropertyRef Name="MeterTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingCharges_dbo_Users_UserID">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PendingCharges" Type="Self.PendingCharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingCharges">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingClients_dbo_Tariffs_TariffID">
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PendingClients" Type="Self.PendingClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PricePlan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingClients">
+              <PropertyRef Name="TariffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PendingClients_dbo_Users_UserID">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PendingClients" Type="Self.PendingClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PendingClients">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period1Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrice" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period1Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period2Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrice" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period2Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period3Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrice" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period3Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period4Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrice" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period4Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period5Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrice" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period5Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period6Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrice" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period6Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period7Price">
+          <End Role="TariffsPrices" Type="Self.TariffsPrice" Multiplicity="1" />
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TariffsPrices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PricePlan">
+              <PropertyRef Name="Period7Price" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transactions_dbo_Tariffs_TariffID">
+          <End Role="PricePlan" Type="Self.PricePlan" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PricePlan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="TariffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Roles_RoleID">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Transactions_dbo_Users_UserID">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderCommands">
+          <End Role="ControlCommands" Type="Self.ControlCommand" Multiplicity="*" />
+          <End Role="ControlOrders" Type="Self.ControlOrder" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="PSMMSDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Alarms" EntityType="Self.Alarm" />
+          <EntitySet Name="ControlCommands" EntityType="Self.ControlCommand" />
+          <EntitySet Name="ControlOrders" EntityType="Self.ControlOrder" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="DailyConsumptions" EntityType="Self.DailyConsumption" />
+          <EntitySet Name="HistoricalDailyConsumptions" EntityType="Self.HistoricalDailyConsumption" />
+          <EntitySet Name="Holidays" EntityType="Self.Holiday" />
+          <EntitySet Name="InvoiceDetails" EntityType="Self.InvoiceDetail" />
+          <EntitySet Name="MeterReads" EntityType="Self.MeterRead" />
+          <EntitySet Name="MeterTypes" EntityType="Self.MeterType" />
+          <EntitySet Name="PendingCharges" EntityType="Self.PendingCharge" />
+          <EntitySet Name="PendingClients" EntityType="Self.PendingClient" />
+          <EntitySet Name="PricePlans" EntityType="Self.PricePlan" />
+          <EntitySet Name="RemovedDailyConsumptions" EntityType="Self.RemovedDailyConsumption" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="TariffsPrices" EntityType="Self.TariffsPrice" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <EntitySet Name="TwelveMonthsConsumptions" EntityType="Self.TwelveMonthsConsumption" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_dbo_Alarms_dbo_Customers_ClientID" Association="Self.FK_dbo_Alarms_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Alarms" EntitySet="Alarms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ControlOrders_dbo_Customers_ClientID" Association="Self.FK_dbo_ControlOrders_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ControlOrders" EntitySet="ControlOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ControlOrders_dbo_Users_UserID" Association="Self.FK_dbo_ControlOrders_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ControlOrders" EntitySet="ControlOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Customers_dbo_MeterTypes_MeterTypeID" Association="Self.FK_dbo_Customers_dbo_MeterTypes_MeterTypeID">
+            <End Role="MeterTypes" EntitySet="MeterTypes" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Customers_dbo_Tariffs_TariffID" Association="Self.FK_dbo_Customers_dbo_Tariffs_TariffID">
+            <End Role="PricePlan" EntitySet="PricePlans" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DailyConsumptions_dbo_Customers_ClientID" Association="Self.FK_dbo_DailyConsumptions_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="DailyConsumptions" EntitySet="DailyConsumptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_HistoricalDailyConsumptions_dbo_Customers_ClientID" Association="Self.FK_dbo_HistoricalDailyConsumptions_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="HistoricalDailyConsumptions" EntitySet="HistoricalDailyConsumptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InvoiceDetails_dbo_Customers_ClientID" Association="Self.FK_dbo_InvoiceDetails_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="InvoiceDetails" EntitySet="InvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MeterReads_dbo_Customers_ClientID" Association="Self.FK_dbo_MeterReads_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="MeterReads" EntitySet="MeterReads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingCharges_dbo_Customers_Client_ID" Association="Self.FK_dbo_PendingCharges_dbo_Customers_Client_ID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="PendingCharges" EntitySet="PendingCharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingClients_dbo_Customers_Client_ID" Association="Self.FK_dbo_PendingClients_dbo_Customers_Client_ID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="PendingClients" EntitySet="PendingClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transactions_dbo_Customers_ClientID" Association="Self.FK_dbo_Transactions_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TwelveMonthsConsumptions_dbo_Customers_ClientID" Association="Self.FK_dbo_TwelveMonthsConsumptions_dbo_Customers_ClientID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="TwelveMonthsConsumptions" EntitySet="TwelveMonthsConsumptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InvoiceDetails_dbo_Users_UserID" Association="Self.FK_dbo_InvoiceDetails_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="InvoiceDetails" EntitySet="InvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingCharges_dbo_InvoiceDetails_ID" Association="Self.FK_dbo_PendingCharges_dbo_InvoiceDetails_ID">
+            <End Role="InvoiceDetails" EntitySet="InvoiceDetails" />
+            <End Role="PendingCharges" EntitySet="PendingCharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transactions_dbo_InvoiceDetails_InvoiceID" Association="Self.FK_dbo_Transactions_dbo_InvoiceDetails_InvoiceID">
+            <End Role="InvoiceDetails" EntitySet="InvoiceDetails" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_MeterReads_dbo_Users_UserID" Association="Self.FK_dbo_MeterReads_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="MeterReads" EntitySet="MeterReads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingClients_dbo_MeterTypes_MeterTypeID" Association="Self.FK_dbo_PendingClients_dbo_MeterTypes_MeterTypeID">
+            <End Role="MeterTypes" EntitySet="MeterTypes" />
+            <End Role="PendingClients" EntitySet="PendingClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingCharges_dbo_Users_UserID" Association="Self.FK_dbo_PendingCharges_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PendingCharges" EntitySet="PendingCharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingClients_dbo_Tariffs_TariffID" Association="Self.FK_dbo_PendingClients_dbo_Tariffs_TariffID">
+            <End Role="PricePlan" EntitySet="PricePlans" />
+            <End Role="PendingClients" EntitySet="PendingClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PendingClients_dbo_Users_UserID" Association="Self.FK_dbo_PendingClients_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PendingClients" EntitySet="PendingClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period1Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period1Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period2Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period2Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period3Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period3Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period4Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period4Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period5Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period5Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period6Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period6Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PricePlan_dbo_TariffsPrices_Period7Price" Association="Self.FK_dbo_PricePlan_dbo_TariffsPrices_Period7Price">
+            <End Role="TariffsPrices" EntitySet="TariffsPrices" />
+            <End Role="PricePlan" EntitySet="PricePlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transactions_dbo_Tariffs_TariffID" Association="Self.FK_dbo_Transactions_dbo_Tariffs_TariffID">
+            <End Role="PricePlan" EntitySet="PricePlans" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Roles_RoleID" Association="Self.FK_dbo_Users_dbo_Roles_RoleID">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Transactions_dbo_Users_UserID" Association="Self.FK_dbo_Transactions_dbo_Users_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="OrderCommands" Association="Self.OrderCommands">
+            <End Role="ControlCommands" EntitySet="ControlCommands" />
+            <End Role="ControlOrders" EntitySet="ControlOrders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PSMMSDBModelStoreContainer" CdmEntityContainer="PSMMSDBEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="PSMMSDBModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alarms">
+            <EntityTypeMapping TypeName="PSMMSDBModel.Alarm">
+              <MappingFragment StoreEntitySet="Alarms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="IsOpen" ColumnName="IsOpen" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ControlCommands">
+            <EntityTypeMapping TypeName="PSMMSDBModel.ControlCommand">
+              <MappingFragment StoreEntitySet="ControlCommands">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ControlOrders">
+            <EntityTypeMapping TypeName="PSMMSDBModel.ControlOrder">
+              <MappingFragment StoreEntitySet="ControlOrders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ControlOrderNumber" ColumnName="ControlOrderNumber" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PSMMSDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="MeterNumber" ColumnName="MeterNumber" />
+                <ScalarProperty Name="TariffID" ColumnName="TariffID" />
+                <ScalarProperty Name="MeterTypeID" ColumnName="MeterTypeID" />
+                <ScalarProperty Name="CardID" ColumnName="CardID" />
+                <ScalarProperty Name="NoOfCards" ColumnName="NoOfCards" />
+                <ScalarProperty Name="ChargeCount" ColumnName="ChargeCount" />
+                <ScalarProperty Name="ContractedPower" ColumnName="ContractedPower" />
+                <ScalarProperty Name="IssuanceState" ColumnName="IssuanceState" />
+                <ScalarProperty Name="InstallDate" ColumnName="InstallDate" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="StatusByte" ColumnName="StatusByte" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="SameClientID" ColumnName="SameClientID" />
+                <ScalarProperty Name="AliasName" ColumnName="AliasName" />
+                <ScalarProperty Name="LastOnlineDate" ColumnName="LastOnlineDate" />
+                <ScalarProperty Name="NIF" ColumnName="NIF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyConsumptions">
+            <EntityTypeMapping TypeName="PSMMSDBModel.DailyConsumption">
+              <MappingFragment StoreEntitySet="DailyConsumptions">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Consumption" ColumnName="Consumption" />
+                <ScalarProperty Name="TotalConsumption" ColumnName="TotalConsumption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoricalDailyConsumptions">
+            <EntityTypeMapping TypeName="PSMMSDBModel.HistoricalDailyConsumption">
+              <MappingFragment StoreEntitySet="HistoricalDailyConsumptions">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ConsumptionKW" ColumnName="ConsumptionKW" />
+                <ScalarProperty Name="Consumption" ColumnName="Consumption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Holidays">
+            <EntityTypeMapping TypeName="PSMMSDBModel.Holiday">
+              <MappingFragment StoreEntitySet="Holidays">
+                <ScalarProperty Name="OffDay" ColumnName="OffDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceDetails">
+            <EntityTypeMapping TypeName="PSMMSDBModel.InvoiceDetail">
+              <MappingFragment StoreEntitySet="InvoiceDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ChargeValue" ColumnName="ChargeValue" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SameClientID" ColumnName="SameClientID" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="ResponseDate" ColumnName="ResponseDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="NumberOfTries" ColumnName="NumberOfTries" />
+                <ScalarProperty Name="RefusionReason" ColumnName="RefusionReason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeterReads">
+            <EntityTypeMapping TypeName="PSMMSDBModel.MeterRead">
+              <MappingFragment StoreEntitySet="MeterReads">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TotalConsumption" ColumnName="TotalConsumption" />
+                <ScalarProperty Name="CurrentMonthlyConsumption" ColumnName="CurrentMonthlyConsumption" />
+                <ScalarProperty Name="CurrentsliceConsumption" ColumnName="CurrentsliceConsumption" />
+                <ScalarProperty Name="TotalBalance" ColumnName="TotalBalance" />
+                <ScalarProperty Name="RemainMoney" ColumnName="RemainMoney" />
+                <ScalarProperty Name="OpenTrials" ColumnName="OpenTrials" />
+                <ScalarProperty Name="Battery" ColumnName="Battery" />
+                <ScalarProperty Name="EarthFrauds" ColumnName="EarthFrauds" />
+                <ScalarProperty Name="Cardreads" ColumnName="Cardreads" />
+                <ScalarProperty Name="SaveReadDate" ColumnName="SaveReadDate" />
+                <ScalarProperty Name="Overload" ColumnName="Overload" />
+                <ScalarProperty Name="RemainKW" ColumnName="RemainKW" />
+                <ScalarProperty Name="SliceNo" ColumnName="SliceNo" />
+                <ScalarProperty Name="Consum1" ColumnName="Consum1" />
+                <ScalarProperty Name="Consum2" ColumnName="Consum2" />
+                <ScalarProperty Name="Consum3" ColumnName="Consum3" />
+                <ScalarProperty Name="Consum4" ColumnName="Consum4" />
+                <ScalarProperty Name="Consum5" ColumnName="Consum5" />
+                <ScalarProperty Name="Consum6" ColumnName="Consum6" />
+                <ScalarProperty Name="Consum7" ColumnName="Consum7" />
+                <ScalarProperty Name="Consum8" ColumnName="Consum8" />
+                <ScalarProperty Name="Consum9" ColumnName="Consum9" />
+                <ScalarProperty Name="Consum10" ColumnName="Consum10" />
+                <ScalarProperty Name="Consum11" ColumnName="Consum11" />
+                <ScalarProperty Name="Consum12" ColumnName="Consum12" />
+                <ScalarProperty Name="MeterState" ColumnName="MeterState" />
+                <ScalarProperty Name="ChargeCount" ColumnName="ChargeCount" />
+                <ScalarProperty Name="RemainInDays" ColumnName="RemainInDays" />
+                <ScalarProperty Name="MeterReadDate" ColumnName="MeterReadDate" />
+                <ScalarProperty Name="EarthFraudDuration" ColumnName="EarthFraudDuration" />
+                <ScalarProperty Name="AvergeDailyConsum" ColumnName="AvergeDailyConsum" />
+                <ScalarProperty Name="PrevMonthConsum" ColumnName="PrevMonthConsum" />
+                <ScalarProperty Name="OpenCoverDate" ColumnName="OpenCoverDate" />
+                <ScalarProperty Name="PowerFactor" ColumnName="PowerFactor" />
+                <ScalarProperty Name="DebitsInMeter" ColumnName="DebitsInMeter" />
+                <ScalarProperty Name="ControlCardId1" ColumnName="ControlCardId1" />
+                <ScalarProperty Name="ControlCardId2" ColumnName="ControlCardId2" />
+                <ScalarProperty Name="ControlCardId3" ColumnName="ControlCardId3" />
+                <ScalarProperty Name="SumOfAllCharges" ColumnName="SumOfAllCharges" />
+                <ScalarProperty Name="PH1_Failure" ColumnName="PH1_Failure" />
+                <ScalarProperty Name="PH1_Duration" ColumnName="PH1_Duration" />
+                <ScalarProperty Name="PH2_Failure" ColumnName="PH2_Failure" />
+                <ScalarProperty Name="PH2_Duration" ColumnName="PH2_Duration" />
+                <ScalarProperty Name="PH3_Failure" ColumnName="PH3_Failure" />
+                <ScalarProperty Name="PH3_Duration" ColumnName="PH3_Duration" />
+                <ScalarProperty Name="Meter_Failure" ColumnName="Meter_Failure" />
+                <ScalarProperty Name="TotalConsumVAR" ColumnName="TotalConsumVAR" />
+                <ScalarProperty Name="CurrMonthConsumVAR" ColumnName="CurrMonthConsumVAR" />
+                <ScalarProperty Name="PreviousMonthConsumVAR" ColumnName="PreviousMonthConsumVAR" />
+                <ScalarProperty Name="OpenKiloWatt" ColumnName="OpenKiloWatt" />
+                <ScalarProperty Name="DebitConsum" ColumnName="DebitConsum" />
+                <ScalarProperty Name="DebitsInMeterPrevious" ColumnName="DebitsInMeterPrevious" />
+                <ScalarProperty Name="MaxLoadKw" ColumnName="MaxLoadKw" />
+                <ScalarProperty Name="MaxLoadAm" ColumnName="MaxLoadAm" />
+                <ScalarProperty Name="MeterReadSource" ColumnName="MeterReadSource" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeterTypes">
+            <EntityTypeMapping TypeName="PSMMSDBModel.MeterType">
+              <MappingFragment StoreEntitySet="MeterTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="AlarmLimit" ColumnName="AlarmLimit" />
+                <ScalarProperty Name="CutoffLimit" ColumnName="CutoffLimit" />
+                <ScalarProperty Name="MaxCurrent" ColumnName="MaxCurrent" />
+                <ScalarProperty Name="NumOfWires" ColumnName="NumOfWires" />
+                <ScalarProperty Name="CTRatio" ColumnName="CTRatio" />
+                <ScalarProperty Name="UncutStartPeriod" ColumnName="UncutStartPeriod" />
+                <ScalarProperty Name="UnCutEndPeriod" ColumnName="UnCutEndPeriod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PendingCharges">
+            <EntityTypeMapping TypeName="PSMMSDBModel.PendingCharge">
+              <MappingFragment StoreEntitySet="PendingCharges">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Issued" ColumnName="Issued" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Client_ID" ColumnName="Client_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PendingClients">
+            <EntityTypeMapping TypeName="PSMMSDBModel.PendingClient">
+              <MappingFragment StoreEntitySet="PendingClients">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Issued" ColumnName="Issued" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="MeterTypeID" ColumnName="MeterTypeID" />
+                <ScalarProperty Name="TariffID" ColumnName="TariffID" />
+                <ScalarProperty Name="Client_ID" ColumnName="Client_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PricePlans">
+            <EntityTypeMapping TypeName="PSMMSDBModel.PricePlan">
+              <MappingFragment StoreEntitySet="PricePlan">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Period1Price" ColumnName="Period1Price" />
+                <ScalarProperty Name="Period2Price" ColumnName="Period2Price" />
+                <ScalarProperty Name="Period3Price" ColumnName="Period3Price" />
+                <ScalarProperty Name="Period4Price" ColumnName="Period4Price" />
+                <ScalarProperty Name="InitialCharge" ColumnName="InitialCharge" />
+                <ScalarProperty Name="Period5Price" ColumnName="Period5Price" />
+                <ScalarProperty Name="Period6Price" ColumnName="Period6Price" />
+                <ScalarProperty Name="Period7Price" ColumnName="Period7Price" />
+                <ScalarProperty Name="StartPeriod1" ColumnName="StartPeriod1" />
+                <ScalarProperty Name="StartPeriod2" ColumnName="StartPeriod2" />
+                <ScalarProperty Name="StartPeriod3" ColumnName="StartPeriod3" />
+                <ScalarProperty Name="StartPeriod4" ColumnName="StartPeriod4" />
+                <ScalarProperty Name="StartPeriod5" ColumnName="StartPeriod5" />
+                <ScalarProperty Name="StartPeriod6" ColumnName="StartPeriod6" />
+                <ScalarProperty Name="StartPeriod7" ColumnName="StartPeriod7" />
+                <ScalarProperty Name="RecalculationLimit1" ColumnName="RecalculationLimit1" />
+                <ScalarProperty Name="RecalculationLimit2" ColumnName="RecalculationLimit2" />
+                <ScalarProperty Name="RecalculationLimit3" ColumnName="RecalculationLimit3" />
+                <ScalarProperty Name="AddedPayment1" ColumnName="AddedPayment1" />
+                <ScalarProperty Name="AddedPayment2" ColumnName="AddedPayment2" />
+                <ScalarProperty Name="AddedPayment3" ColumnName="AddedPayment3" />
+                <ScalarProperty Name="KiloWattAlarm" ColumnName="KiloWattAlarm" />
+                <ScalarProperty Name="CustomerService1" ColumnName="CustomerService1" />
+                <ScalarProperty Name="CustomerService2" ColumnName="CustomerService2" />
+                <ScalarProperty Name="CustomerService3" ColumnName="CustomerService3" />
+                <ScalarProperty Name="CustomerService4" ColumnName="CustomerService4" />
+                <ScalarProperty Name="CustomerService5" ColumnName="CustomerService5" />
+                <ScalarProperty Name="CustomerService6" ColumnName="CustomerService6" />
+                <ScalarProperty Name="CustomerService7" ColumnName="CustomerService7" />
+                <ScalarProperty Name="CommercialDamgha" ColumnName="CommercialDamgha" />
+                <ScalarProperty Name="NoConsumptionFee" ColumnName="NoConsumptionFee" />
+                <ScalarProperty Name="NoOfTariffs" ColumnName="NoOfTariffs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RemovedDailyConsumptions">
+            <EntityTypeMapping TypeName="PSMMSDBModel.RemovedDailyConsumption">
+              <MappingFragment StoreEntitySet="RemovedDailyConsumptions">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Consumption" ColumnName="Consumption" />
+                <ScalarProperty Name="TotalConsumption" ColumnName="TotalConsumption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="PSMMSDBModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AddUserPrivilege" ColumnName="AddUserPrivilege" />
+                <ScalarProperty Name="AddRolePrivilege" ColumnName="AddRolePrivilege" />
+                <ScalarProperty Name="AddTariffPrivilege" ColumnName="AddTariffPrivilege" />
+                <ScalarProperty Name="AddMeterTypePrivilege" ColumnName="AddMeterTypePrivilege" />
+                <ScalarProperty Name="AddClientPrivilege" ColumnName="AddClientPrivilege" />
+                <ScalarProperty Name="ChargeClientPrivilege" ColumnName="ChargeClientPrivilege" />
+                <ScalarProperty Name="ClientQueryPrivilege" ColumnName="ClientQueryPrivilege" />
+                <ScalarProperty Name="EditRolePrivilege" ColumnName="EditRolePrivilege" />
+                <ScalarProperty Name="EditUserPrivilege" ColumnName="EditUserPrivilege" />
+                <ScalarProperty Name="EditUsersPasswordPrivilege" ColumnName="EditUsersPasswordPrivilege" />
+                <ScalarProperty Name="ReportsPrivilege" ColumnName="ReportsPrivilege" />
+                <ScalarProperty Name="ReadMeterPrivilege" ColumnName="ReadMeterPrivilege" />
+                <ScalarProperty Name="MeterReadingsEnquiryPrivilege" ColumnName="MeterReadingsEnquiryPrivilege" />
+                <ScalarProperty Name="EditClientPrivilege" ColumnName="EditClientPrivilege" />
+                <ScalarProperty Name="CloseRelay" ColumnName="CloseRelay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TariffsPrices">
+            <EntityTypeMapping TypeName="PSMMSDBModel.TariffsPrice">
+              <MappingFragment StoreEntitySet="TariffsPrices">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="PSMMSDBModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TariffID" ColumnName="TariffID" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="OnCardBalance" ColumnName="OnCardBalance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TwelveMonthsConsumptions">
+            <EntityTypeMapping TypeName="PSMMSDBModel.TwelveMonthsConsumption">
+              <MappingFragment StoreEntitySet="TwelveMonthsConsumptions">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="January" ColumnName="January" />
+                <ScalarProperty Name="JanuaryMoney" ColumnName="JanuaryMoney" />
+                <ScalarProperty Name="February" ColumnName="February" />
+                <ScalarProperty Name="FebruaryMoney" ColumnName="FebruaryMoney" />
+                <ScalarProperty Name="March" ColumnName="March" />
+                <ScalarProperty Name="MarchMoney" ColumnName="MarchMoney" />
+                <ScalarProperty Name="April" ColumnName="April" />
+                <ScalarProperty Name="AprilMoney" ColumnName="AprilMoney" />
+                <ScalarProperty Name="May" ColumnName="May" />
+                <ScalarProperty Name="MayMoney" ColumnName="MayMoney" />
+                <ScalarProperty Name="June" ColumnName="June" />
+                <ScalarProperty Name="JuneMoney" ColumnName="JuneMoney" />
+                <ScalarProperty Name="July" ColumnName="July" />
+                <ScalarProperty Name="JulyMoney" ColumnName="JulyMoney" />
+                <ScalarProperty Name="August" ColumnName="August" />
+                <ScalarProperty Name="AugustMoney" ColumnName="AugustMoney" />
+                <ScalarProperty Name="September" ColumnName="September" />
+                <ScalarProperty Name="SeptemberMoney" ColumnName="SeptemberMoney" />
+                <ScalarProperty Name="October" ColumnName="October" />
+                <ScalarProperty Name="OctoberMoney" ColumnName="OctoberMoney" />
+                <ScalarProperty Name="November" ColumnName="November" />
+                <ScalarProperty Name="NovemberMoney" ColumnName="NovemberMoney" />
+                <ScalarProperty Name="December" ColumnName="December" />
+                <ScalarProperty Name="DecemberMoney" ColumnName="DecemberMoney" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PSMMSDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="OrderCommands" TypeName="PSMMSDBModel.OrderCommands" StoreEntitySet="OrderCommands">
+            <EndProperty Name="ControlCommands">
+              <ScalarProperty Name="ID" ColumnName="CommandID" />
+            </EndProperty>
+            <EndProperty Name="ControlOrders">
+              <ScalarProperty Name="ID" ColumnName="OrderID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

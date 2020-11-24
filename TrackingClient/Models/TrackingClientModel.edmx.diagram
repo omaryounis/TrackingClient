@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0be71735461944eebeef2f715e15f24f" Name="Diagram1">
+        <EntityTypeShape EntityType="PSMMSDBModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.Alarm" Width="1.5" PointX="7.5" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.ControlCommand" Width="1.5" PointX="8.25" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.ControlOrder" Width="1.5" PointX="10.5" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.Customer" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.DailyConsumption" Width="1.5" PointX="7.5" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.HistoricalDailyConsumption" Width="1.5" PointX="7.5" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.Holiday" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.InvoiceDetail" Width="1.5" PointX="10.5" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.MeterRead" Width="1.5" PointX="13.5" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.MeterType" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.PendingCharge" Width="1.5" PointX="15.75" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.PendingClient" Width="1.5" PointX="10.5" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.PricePlan" Width="1.5" PointX="3" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.RemovedDailyConsumption" Width="1.5" PointX="2.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.Role" Width="1.5" PointX="6" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.TariffsPrice" Width="1.5" PointX="0.75" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.Transaction" Width="1.5" PointX="15.75" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.TwelveMonthsConsumption" Width="1.5" PointX="7.5" PointY="51.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PSMMSDBModel.User" Width="1.5" PointX="8.25" PointY="11.625" IsExpanded="true" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_Alarms_dbo_Customers_ClientID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_ControlOrders_dbo_Customers_ClientID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_ControlOrders_dbo_Users_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_Customers_dbo_MeterTypes_MeterTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_Customers_dbo_Tariffs_TariffID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_DailyConsumptions_dbo_Customers_ClientID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_HistoricalDailyConsumptions_dbo_Customers_ClientID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_InvoiceDetails_dbo_Customers_ClientID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_MeterReads_dbo_Customers_ClientID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PendingCharges_dbo_Customers_Client_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PendingClients_dbo_Customers_Client_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_Transactions_dbo_Customers_ClientID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_TwelveMonthsConsumptions_dbo_Customers_ClientID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_InvoiceDetails_dbo_Users_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PendingCharges_dbo_InvoiceDetails_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_Transactions_dbo_InvoiceDetails_InvoiceID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_MeterReads_dbo_Users_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PendingClients_dbo_MeterTypes_MeterTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PendingCharges_dbo_Users_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PendingClients_dbo_Tariffs_TariffID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PendingClients_dbo_Users_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PricePlan_dbo_TariffsPrices_Period1Price" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PricePlan_dbo_TariffsPrices_Period2Price" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PricePlan_dbo_TariffsPrices_Period3Price" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PricePlan_dbo_TariffsPrices_Period4Price" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PricePlan_dbo_TariffsPrices_Period5Price" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PricePlan_dbo_TariffsPrices_Period6Price" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_PricePlan_dbo_TariffsPrices_Period7Price" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_Transactions_dbo_Tariffs_TariffID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_Users_dbo_Roles_RoleID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.FK_dbo_Transactions_dbo_Users_UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="PSMMSDBModel.OrderCommands" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

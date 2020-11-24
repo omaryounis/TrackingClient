@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5D7AF5CB-CF81-45FC-AC93-09908836B387}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TrackingClient</RootNamespace>
+    <AssemblyName>TrackingClient</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.95.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.3\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="CsvHelper, Version=15.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.15.0.8\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Alarm.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClientTrackingMap.cs" />
+    <Compile Include="Models\ControlCommand.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ControlOrder.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DailyConsumption.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HistoricalDailyConsumption.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Holiday.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InvoiceDetail.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MeterRead.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MeterType.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PendingCharge.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PendingClient.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PricePlan.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RemovedDailyConsumption.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TariffsPrice.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TrackingClientModel.Context.cs" />
+    <Compile Include="Models\TrackingClientModel.cs" />
+    <Compile Include="Models\TrackingClientModel.Designer.cs">
+      <DependentUpon>TrackingClientModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TrackingClientModel1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Transaction.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TwelveMonthsConsumption.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>TrackingClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Service1.Designer.cs">
+      <DependentUpon>Service1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ClientTracking.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="Models\TrackingClientModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TrackingClientModel1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\TrackingClientModel.edmx.diagram">
+      <DependentUpon>TrackingClientModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Service1.resx">
+      <DependentUpon>Service1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\TrackingClientModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TrackingClientModel1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
