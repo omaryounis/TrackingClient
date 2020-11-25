@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using CsvHelper;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -67,7 +68,7 @@ namespace TrackingClient
 
 
 
-                var path1 = "C:\\TrackingClientSpain\\TrackingClient" + DateTime.Now.ToString("MM-dd-yyyy") + ".csv";
+                var path1 = "C:\\GTServer\\System\\TrackingClientSpain\\TrackingClient" + DateTime.Now.ToString("MM-dd-yyyy") + ".csv";
                 if (!File.Exists(path1))
                 {
                     var f = File.Create(path1);
@@ -148,19 +149,23 @@ namespace TrackingClient
                 //}
 
 
-              
+
                 using (StreamWriter DestinationFile = new StreamWriter(path1, true))
                 {
                     DestinationFile.WriteLine("T_NIF" + ";" + "T_DIRECCION" + ";" + "T_BALANCE" + ";" + "T_NOMBRE" + ";" + "T_MeterNumber" + ";" + "T_TELEFONO" + ";");
-                    //foreach (var item in Query)
-                    //{
-                    //    DestinationFile.WriteLine(item.T_NIF + ";" + item.T_DIRECCION + ";" + item.T_BALANCE + ";" + item.T_NOMBRE + ";" + item.T_MeterNumber + ";" + item.T_TELEFONO + ";");
-                    //}
-
-
+                    foreach (var item in Query)
+                    {
+                        DestinationFile.WriteLine(item.T_NIF + ";" + item.T_DIRECCION + ";" + item.T_BALANCE + ";" + item.T_NOMBRE + ";" + item.T_MeterNumber + ";" + item.T_TELEFONO + ";");
+                    }
                 }
 
-
+                //string createText = "T_NIF" + "," + "T_DIRECCION" + "," + "T_BALANCE" + "," + "T_NOMBRE" + "," + "T_MeterNumber" + "," + "T_TELEFONO" + "," + Environment.NewLine;
+                //File.WriteAllText(path1, createText);
+                //foreach (var item in Query)
+                //{
+                //    string appendText = item.T_NIF + "," + item.T_DIRECCION + "," + item.T_BALANCE + "," + item.T_NOMBRE + "," + item.T_MeterNumber + "," + item.T_TELEFONO + "," + Environment.NewLine;
+                //    File.AppendAllText(path1, appendText);
+                //}
             }
             catch (Exception e)
             {
